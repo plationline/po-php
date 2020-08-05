@@ -1,0 +1,6 @@
+1. Log in into merchant interface
+2. Obtain f_login
+3. Obtain security keys (merchant side)
+4. Obtain IV and IV ITSN
+5. In each file (auth, auth_response, itsn, refund, settle, void) you have to load the needed keys. Please be careful which keys you use, every time you need to load a key take a look in PHP which key is needed (private or public)
+6. Auth.php is the first file you need to run, this is the Authorization call
