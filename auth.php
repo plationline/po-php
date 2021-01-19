@@ -165,6 +165,14 @@ $po->setIV('IV AUTH');
 // test mode: 0 - disabled, 1 - enabled
 $po->test_mode = 1;
 
+// OPTIONAL - send email to client requesting payment and days of valability for payment link
+/*$f_request['paylink'] = array(
+	'email2client'     => 1,
+	'sms2client'       => 0,
+	'daysofvalability' => 30,
+);*/
+// END OPTIONAL - send email to client requesting payment and days of valability for payment link
+
 // plationline authorization call
 // simple payment, no installments / FARA RATE
 $auth_response = $po->auth($f_request, 2); // parameter 1 - request content, 2 - f_action (2 simple payment, 12 - ghiseu Posta romana, 13 - ghiseu Raiffeisen Bank)
