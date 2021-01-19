@@ -190,7 +190,14 @@ if (!empty($redirect_url)) {
 // EX: $f_request['f_rate'] = 6;
 
 // AUTH CALL FOR INSTALLMENTS
-// $po->auth($f_request, 16); 10 - Raiffeisen Bank installments, 16 - Banca Transilvania installments, 18 - Alpha Bank Installments, 22 - BRD
+// $po->auth($f_request, 16);
+/*
+10 - Raiffeisen Bank installments
+16 - Banca Transilvania installments
+18 - Alpha Bank Installments
+22 - BRD Finance
+23 - Garanti Bank
+*/
 
 // END FOR INSTALLMENTS / PENTRU RATE
 
