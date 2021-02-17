@@ -36,6 +36,8 @@ class PO5
     private $url_sv_refund_response_xml 			= 'https://secure.plationline.ro/xml_validation/refund.response.v5.xsd'; 	// refund response
     private $url_sv_paylink_xml 					= 'https://secure.plationline.ro/xml_validation/v5/f_message.paylink.xsd'; 	// paylink
     private $url_sv_paylink_response_xml 			= 'https://secure.plationline.ro/xml_validation/v5/pay.link.by.trxid.url.response.xsd'; 	// paylink response
+    private $url_sv_cancel_recurrence_xml 		    = 'https://secure.plationline.ro/xml_validation/f_message.cancel.recurrence.v5.xsd'; 	// cancel recurring
+    private $url_sv_cancel_recurrence_response_xml  = 'https://secure.plationline.ro/xml_validation/cancel.recurrence.response.v5.xsd'; 	// cancel recurring response
 
     // public
     public $f_login 	= null;
@@ -356,6 +358,38 @@ class PO5
 
         // validez xml-ul primit ca raspuns de la PO
         $this->validate_xml($response, $this->url_sv_refund_response_xml);
+
+        return $this->xml_to_object($response);
+    }
+
+    public function cancel_recurrence($f_request, $f_action = 26)
+    {
+        // ne asiguram ca stergem tot ce e in campul f_request
+        $this->f_request = null;
+        $f_request['f_action'] = $f_action;
+        $request = $this->setFRequest($f_request, 'po_cancel_recurrence', $this->url_sv_cancel_recurrence_xml);
+
+        $opts = array(
+            'http' => array(
+                'user_agent' => 'PlatiOnline-SOAP'
+            )
+        );
+        $context = stream_context_create($opts);
+        $client  = new \SoapClient(null, array(
+            'location' 		 => $this->url,
+            'uri'      		 => 'cancel-recurring',
+            'stream_context' => $context
+        ));
+
+        $response = $client->__doRequest($request, $this->url, 'cancel-recurring', 1);
+        echo '<pre>';
+
+        if (empty($response)) {
+            throw new \Exception('ERROR: Nu am putut comunica cu serverul PO pentru operatiunea de anulare recurenta!');
+        }
+
+        // validez xml-ul primit ca raspuns de la PO
+        $this->validate_xml($response, $this->url_sv_cancel_recurrence_response_xml);
 
         return $this->xml_to_object($response);
     }
