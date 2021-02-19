@@ -382,7 +382,6 @@ class PO5
         ));
 
         $response = $client->__doRequest($request, $this->url, 'cancel-recurring', 1);
-        echo '<pre>';
 
         if (empty($response)) {
             throw new \Exception('ERROR: Nu am putut comunica cu serverul PO pentru operatiunea de anulare recurenta!');
