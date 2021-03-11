@@ -60,7 +60,7 @@ $transaction_relay_response = array();
 $transaction_relay_response['f_relay_response_url'] = 'http://domain.com/auth_response.php';
 
 // INFO f_relay_method
-$transaction_relay_response['f_relay_method'] = 'POST_S2S_PO_PAGE'; // PTOR, POST_S2S_PO_PAGE, POST_S2S_MT_PAGE, SOAP_PO_PAGE, SOAP_MT_PAGE
+$transaction_relay_response['f_relay_method'] = 'PTOR'; // PTOR, POST_S2S_PO_PAGE, POST_S2S_MT_PAGE, SOAP_PO_PAGE, SOAP_MT_PAGE
 // * if your website has SSL enabled, use PTOR relay method. It will redirect the client to merchant website at f_relay_response_url
 // * if your website DOES NOT USE SSL, use POST_S2S_PO_PAGE. It will show the PlatiOnline response page and we will send the tranzaction response SERVER-to-SERVER to f_relay_response_url so you can update the order status
 // END INFO f_relay_method
