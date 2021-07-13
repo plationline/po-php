@@ -1,4 +1,10 @@
 <?php
+require_once("PlatiOnline/PO5.php");
+
+use PlatiOnline\PO5 as PO5;
+
+$po = new PO5();
+
 $f_request = array();
 
 $partner_info = array();
@@ -33,10 +39,6 @@ $partner_info['invoice']['f_address'] = 'Address';            // must not be emp
 //mcc_list_csv
 $partner_info['mcc_list_csv'] = '1701,1702';
 $f_request['partner_info'] = $partner_info;
-
-require_once("lib/po5.php");
-
-$po = new PO5();
 
 //f_login and RSA key will be saved in config
 $po->f_login = 'F_LOGIN from merchant interface';
