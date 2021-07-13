@@ -38,6 +38,7 @@ class PO5
     private $url_sv_paylink_response_xml 			= 'https://secure.plationline.ro/xml_validation/v5/pay.link.by.trxid.url.response.xsd'; 	// paylink response
     private $url_sv_cancel_recurrence_xml 		    = 'https://secure.plationline.ro/xml_validation/f_message.cancel.recurrence.v5.xsd'; 	// cancel recurring
     private $url_sv_cancel_recurrence_response_xml  = 'https://secure.plationline.ro/xml_validation/cancel.recurrence.response.v5.xsd'; 	// cancel recurring response
+    private $url_sv_partner_xml 				    = 'https://secure.plationline.ro/xml_validation/f_message.partner.v5.xsd'; 	// add partner
 
     // public
     public $f_login 	= null;
@@ -130,6 +131,44 @@ class PO5
         $this->validate_xml($response, $this->url_sv_sale_token_response_xml);
         return $this->xml_to_object($response);
     }
+
+    public function register_partner($f_request, $f_action = 23) {
+        // ne asiguram ca stergem tot ce e in campul f_request
+        $this->f_request = null;
+        $f_request['f_action'] = $f_action;
+        $request = $this->setFRequest($f_request, 'register_partener', $this->url_sv_partner_xml);
+
+        $opts = array(
+            'http' => array(
+                'user_agent' => 'PlatiOnline-SOAP'
+            )
+        );
+        $context = stream_context_create($opts);
+        $client  = new \SoapClient(null, array(
+            'location' 		 => $this->url,
+            'uri'      		 => 'register-partener',
+            'stream_context' => $context
+        ));
+
+        $response = $client->__doRequest($request, $this->url, 'register-partener', 1);
+
+        if (empty($response)) {
+            throw new \Exception('ERROR: Nu am putut comunica cu serverul PO pentru operatiunea de autorizare!');
+        }
+
+        $register_response = $this->xml_to_object($response);
+        if ($this->get_xml_tag_content($register_response, 'PO_ERROR_CODE') == 1) {
+            die($this->get_xml_tag_content($register_response, 'PO_ERROR_REASON'));
+        } else {
+            $X_PARTNER_ID = $this->get_xml_tag_content($register_response, 'X_PARTNER_ID');
+            if (!empty($X_PARTNER_ID)) {
+                return $X_PARTNER_ID;
+            } else {
+                die('<b>ERROR</b>: Serverul nu a intors raspuns pentru Register Partener!');
+            }
+        }
+    }
+
     public function paylink($f_request, $f_action = 21)
     {
         // ne asiguram ca stergem tot ce e in campul f_request
