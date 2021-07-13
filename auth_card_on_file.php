@@ -174,7 +174,7 @@ $po->test_mode = 1;
 // END OPTIONAL - send email to client requesting payment and days of valability for payment link
 
 // plationline authorization call
-// simple payment, no installments / FARA RATE
+// Master Card-On-File payment request, no installments / FARA RATE
 $auth_response = $po->auth($f_request, 28); // parameter 1 - request content, 28 - card on file)
 $redirect_url = $po->get_xml_tag_content($auth_response, 'PO_REDIRECT_URL');
 $transid = $po->get_xml_tag_content($auth_response, 'X_TRANS_ID');
