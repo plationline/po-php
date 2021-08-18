@@ -10,34 +10,33 @@ $f_request = array();
 $partner_info = array();
 
 //contact
-$partner_info['contact']['f_email'] = 'email@domain.com';    // must not be empty. If empty don't send this tag, it will be filled in PO interface
-$partner_info['contact']['f_phone'] = '0000000000';        // must not be empty, minimum 4 characters. If empty don't send this tag, it will be filled in PO interface
+$partner_info['contact']['f_email'] = 'email@domain.com';       // must not be empty.
+$partner_info['contact']['f_phone'] = '0000000000';             // must not be empty. Minimum 4 characters
+$partner_info['contact']['f_first_name'] = 'first name';        // must not be empty. Maximum 50 characters
+$partner_info['contact']['f_last_name'] = 'last name';          // must not be empty. Maximum 50 characters
+$partner_info['contact']['f_middle_name'] = '';                 // optional
+$partner_info['contact']['f_job_position'] = 'job';             // must not be empty. Maximum 50 characters
 
-$partner_info['contact']['f_first_name'] = 'first name';        // must not be empty. If empty don't send this tag, it will be filled in PO interface
-$partner_info['contact']['f_last_name'] = 'last name';            // must not be empty. If empty don't send this tag, it will be filled in PO interface
-$partner_info['contact']['f_middle_name'] = '';
-$partner_info['contact']['f_job_position'] = 'job';
-
-$partner_info['administrator']['f_email'] = 'email@domain.com';    // must not be empty. If empty don't send this tag, it will be filled in PO interface
-$partner_info['administrator']['f_phone'] = '0000000000';
-$partner_info['administrator']['f_first_name'] = 'first name';        // must not be empty. If empty don't send this tag, it will be filled in PO interface
-$partner_info['administrator']['f_last_name'] = 'last name';            // must not be empty. If empty don't send this tag, it will be filled in PO interface
-$partner_info['administrator']['f_middle_name'] = '';
-$partner_info['administrator']['f_job_position'] = 'job';
+$partner_info['administrator']['f_email'] = 'email@domain.com'; // must not be empty.
+$partner_info['administrator']['f_phone'] = '0000000000';       // must not be empty. Minimum 4 characters.
+$partner_info['administrator']['f_first_name'] = 'first name';  // must not be empty. Maximum 50 characters
+$partner_info['administrator']['f_last_name'] = 'last name';    // must not be empty. Maximum 50 characters
+$partner_info['administrator']['f_middle_name'] = '';           // optional
+$partner_info['administrator']['f_job_position'] = 'job';       // must not be empty. Maximum 50 characters
 
 //invoice
-$partner_info['invoice']['f_company'] = 'Test company';        // optional
-$partner_info['invoice']['f_cui'] = '111111';            // optional
-$partner_info['invoice']['f_reg_com'] = 'J55/99/2000';        // optional
-$partner_info['invoice']['f_cnp'] = '9999999999999';        // optional
-$partner_info['invoice']['f_zip'] = '999999';            // optional
-$partner_info['invoice']['f_country'] = 'Romania';            // must not be empty. If empty don't send this tag, it will be filled in PO interface
-$partner_info['invoice']['f_state'] = 'Bucuresti';            // must not be empty. If empty don't send this tag, it will be filled in PO interface
-$partner_info['invoice']['f_city'] = 'Bucuresti';            // must not be empty. If empty don't send this tag, it will be filled in PO interface
-$partner_info['invoice']['f_address'] = 'Address';            // must not be empty. If empty don't send this tag, it will be filled in PO interface
+$partner_info['invoice']['f_company'] = 'Test company';         // must not be empty. Maximum 50 characters
+$partner_info['invoice']['f_cui'] = '111111';                   // must not be empty
+$partner_info['invoice']['f_reg_com'] = 'J55/99/2000';          // must not be empty. Maximum 50 characters
+$partner_info['invoice']['f_cnp'] = '9999999999999';            // optional
+$partner_info['invoice']['f_zip'] = '999999';                   // optional
+$partner_info['invoice']['f_country'] = 'Romania';              //optional
+$partner_info['invoice']['f_state'] = 'Bucuresti';              // must not be empty. Maximum 50 characters
+$partner_info['invoice']['f_city'] = 'Bucuresti';               // must not be empty. Maximum 50 characters
+$partner_info['invoice']['f_address'] = 'Address';              // must not be empty. Maximum 250 characters
 
 //mcc_list_csv
-$partner_info['mcc_list_csv'] = '1701,1702';
+$partner_info['mcc_list_csv'] = '1701,1702';                    // must not be empty. Maximum 250 characters
 $f_request['partner_info'] = $partner_info;
 
 //f_login and RSA key will be saved in config
