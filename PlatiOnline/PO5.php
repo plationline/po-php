@@ -38,7 +38,10 @@ class PO5
     private $url_sv_paylink_response_xml 			= 'https://secure.plationline.ro/xml_validation/v5/pay.link.by.trxid.url.response.xsd'; 	// paylink response
     private $url_sv_cancel_recurrence_xml 		    = 'https://secure.plationline.ro/xml_validation/f_message.cancel.recurrence.v5.xsd'; 	// cancel recurring
     private $url_sv_cancel_recurrence_response_xml  = 'https://secure.plationline.ro/xml_validation/cancel.recurrence.response.v5.xsd'; 	// cancel recurring response
-    private $url_sv_partner_xml 				    = 'https://secure.plationline.ro/xml_validation/f_message.partner.v5.xsd'; 	// add partner
+    private $url_sv_partner_xml                     = 'https://secure.plationline.ro/xml_validation/f_message.partner.v5.xsd';    // add partner
+    private $url_sv_imsn_xml                        = 'https://secure.plationline.ro/xml_validation/imsn-v1.xsd';    // imsn partner
+    private $url_sv_query_partener_xml              = 'https://secure.plationline.ro/xml_validation/f_message.query-partener.v1.xsd';    // query partener call
+    private $url_sv_query_partener_response_xml     = 'https://secure.plationline.ro/xml_validation/query-partener.response.v1.xsd';    // query partener response
 
     // public
     public $f_login 	= null;
@@ -254,6 +257,12 @@ class PO5
         return $this->decrypt_response($f_relay_message, $f_crypt_message, $this->url_sv_itsn_xml);
     }
 
+	// obtin datele din notificarea IMSN
+	public function imsn($f_imsn_message, $f_crypt_message)
+	{
+		return $this->decrypt_response($f_imsn_message, $f_crypt_message, $this->url_sv_imsn_xml);
+	}
+
     // interogare
     public function query($f_request, $f_action = 0)
     {
@@ -282,6 +291,34 @@ class PO5
         $this->validate_xml($response, $this->url_sv_itsn_response_xml);
         return $this->xml_to_object($response);
     }
+
+	// interogare
+	public function query_partener($f_request, $f_action = 40)
+	{
+		// ne asiguram ca stergem tot ce e in campul f_request
+		$this->f_request = null;
+		$f_request['f_action'] = $f_action;
+		$request = $this->setFRequest($f_request, 'po_query_partener', $this->url_sv_query_partener_xml);
+
+		$opts = array(
+			'http' => array(
+				'user_agent' => 'PlatiOnline-SOAP',
+			),
+		);
+		$context = stream_context_create($opts);
+		$client = new SoapClient(null, array(
+			'location'       => $this->url,
+			'uri'            => 'query-partener',
+			'stream_context' => $context,
+		));
+		$response = $client->__doRequest($request, $this->url, 'query-partener', 1);
+		if (!isset($response) || empty($response)) {
+			die('<b>ERROR</b>: Nu am putut comunica cu serverul PO pentru operatiunea de interogare partener!');
+		}
+		// validez xml-ul primit ca raspuns de la PO
+		$this->validate_xml($response, $this->url_sv_query_partener_response_xml);
+		return $this->xml_to_object($response);
+	}
 
     public function query_by_date($f_request, $f_action = 0)
     {
