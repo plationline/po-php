@@ -28,7 +28,7 @@ $partner_info['administrator']['f_job_position'] = 'job';       // optional. Max
 $partner_info['invoice']['f_company'] = 'Test company';         // must not be empty. Maximum 50 characters
 $partner_info['invoice']['f_cui'] = '111111';                   // must not be empty. alphanumeric
 $partner_info['invoice']['f_reg_com'] = 'J55/99/2000';          // must not be empty. Maximum 50 characters
-$partner_info['invoice']['f_country'] = 'Romania';              // optional, maximum 50 characters
+$partner_info['invoice']['f_country'] = 'RO';                   // optional, ISO Alpha 2
 $partner_info['invoice']['f_state'] = 'Bucuresti';              // must not be empty. Maximum 50 characters
 $partner_info['invoice']['f_city'] = 'Bucuresti';               // must not be empty. Maximum 50 characters
 $partner_info['invoice']['f_address'] = 'Address';              // must not be empty. Maximum 250 characters
@@ -38,11 +38,13 @@ $partner_info['invoice']['f_zip'] = '999999';                   // optional . Ma
 $partner_info['mcc_list_csv'] = '1701,1702';                    // must not be empty. Maximum 250 characters
 
 //bank info
-// $partner_info['bank_info'] is optional, if sent the following rules apply
+// $partner_info['bank_info'] is mandatory
 $partner_info['bank_info']['f_currency'] = 'RON';               // must not be empty, RON/EUR/USD, default RON
 $partner_info['bank_info']['f_bank_name'] = 'Bank name';        // must not be empty. Maximum 250 characters
-$partner_info['bank_info']['f_bank_iban'] = 'IBAN';             //  must not be empty, no whitespaces, minimum 16 characters
-$partner_info['bank_info']['f_bank_country'] = 'RO';            //  must not be empty, RO for now
+$partner_info['bank_info']['f_bank_iban'] = 'IBAN';             // must not be empty, no whitespaces, minimum 16 characters
+$partner_info['bank_info']['f_bank_country'] = 'RO';            // must not be empty, ISO Alpha 2, RO for now
+$partner_info['bank_info']['f_bank_state'] = 'Bucuresti';       // Maximum 50 characters
+$partner_info['bank_info']['f_bank_city'] = 'Bucuresti';        // Maximum 50 characters
 $partner_info['bank_info']['f_bank_address'] = 'address';       // optional. Maximum 250 characters
 $partner_info['bank_info']['f_bank_swift'] = '-';               // optional. Maximum 250 characters
 
