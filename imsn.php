@@ -10,7 +10,7 @@ $po->setRSAKeyDecrypt('RSA Private ITSN [Merchant side]');
 //IV ITSN:
 $po->setIVITSN('IV ITSN');
 
-$imsn = $po->itsn($_POST['f_imsn_message'], $_POST['f_crypt_message']);
+$imsn = $po->imsn($_POST['f_imsn_message'], $_POST['f_crypt_message']);
 
 //set query config
 // RSA Public AUTH [Merchant side]:

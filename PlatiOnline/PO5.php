@@ -306,7 +306,7 @@ class PO5
 			),
 		);
 		$context = stream_context_create($opts);
-		$client = new SoapClient(null, array(
+		$client = new \SoapClient(null, array(
 			'location'       => $this->url,
 			'uri'            => 'query-partener',
 			'stream_context' => $context,
