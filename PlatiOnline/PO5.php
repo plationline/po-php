@@ -42,6 +42,7 @@ class PO5
     private $url_sv_imsn_xml                        = 'https://secure.plationline.ro/xml_validation/imsn-v1.xsd';    // imsn partner
     private $url_sv_query_partener_xml              = 'https://secure.plationline.ro/xml_validation/f_message.query-partener.v1.xsd';    // query partener call
     private $url_sv_query_partener_response_xml     = 'https://secure.plationline.ro/xml_validation/query-partener.response.v1.xsd';    // query partener response
+    private $url_sv_query_by_rrn_xml 		        = 'https://secure.plationline.ro/xml_validation/f_message.query-by-rrn.v1.xsd'; 	// query by rrn
 
     // public
     public $f_login 	= null;
@@ -344,6 +345,35 @@ class PO5
         }
         // validez xml-ul primit ca raspuns de la PO
         $this->validate_xml($response, $this->url_sv_query_by_date_response_xml);
+        return $this->xml_to_object($response);
+    }
+
+    // interogare dupa RRN
+    public function query_by_rrn($f_request, $f_action = 0)
+    {
+        // ne asiguram ca stergem tot ce e in campul f_request
+        $this->f_request = null;
+        $f_request['f_action'] = $f_action;
+        $request = $this->setFRequest($f_request, 'po_query', $this->url_sv_query_by_rrn_xml);
+
+        $opts = array(
+            'http' => array(
+                'user_agent' => 'PlatiOnline-SOAP'
+            )
+        );
+        $context = stream_context_create($opts);
+        $client  = new \SoapClient(null, array(
+            'location' 		 => $this->url,
+            'uri'      		 => 'query-by-rrn',
+            'stream_context' => $context
+        ));
+        $response = $client->__doRequest($request, $this->url, 'query-by-rrn', 1);
+
+        if (empty($response)) {
+            throw new \Exception('ERROR: Nu am putut comunica cu serverul PO pentru operatiunea de interogare dupa RRN!');
+        }
+        // validez xml-ul primit ca raspuns de la PO
+        $this->validate_xml($response, $this->url_sv_query_by_date_response_xml );
         return $this->xml_to_object($response);
     }
 
