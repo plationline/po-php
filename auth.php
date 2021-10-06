@@ -134,6 +134,10 @@ $shipping['vat'] = (float)2.5;
 $f_request['f_order_cart']['shipping'] = $shipping;
 $f_request['f_order_string'] = 'Order number ' . $f_request['f_order_number'] . ' on website http://domain.com';
 
+// TRA
+$f_request['f_trx_risk_analysis'] = 0; // 0 - false, 1 - true
+// Acest tag este luat in considerare doar pentru comerciantii care au semnat anexa TRA si pentru care s-au activat exceptiile 3DS2 - TRA "Transaction Risk Analysis" false - tranzactia se va trimite fara exceptie - default value true - tranzactia se va trimite cu exceptie
+
 //custom merchant fields - they will be returned to you in f_relay_response_url by POST or GET or SOAP, according to where you send them
 //$f_request['merchants_fields']['PostQueryString'] = 'postmerchant=posttestmerch'; //PostQueryString
 //$f_request['merchants_fields']['GetQueryString'] 	= 'getmerchant=gettestmerch'; //GetQueryString
