@@ -24,12 +24,15 @@ $raspuns_query_partener = $po->query_partener($f_request, 40);
 if ($po->get_xml_tag_content($raspuns_query_partener, 'PO_ERROR_CODE') == 1) {
 	throw new Exception($po->get_xml_tag_content($raspuns_query_partener, 'PO_ERROR_REASON'));
 } else {
-	$partenerid = (int)$po->get_xml_tag_content($raspuns_query_partener, 'PARTENERID');
-	$merchant_info = $po->get_xml_tag($raspuns_query_partener, 'MERCHANT_INFO');
-	$f_login = $po->get_xml_tag_content($merchant_info, 'F_LOGIN');
-	$active = $po->get_xml_tag_content($merchant_info, 'ACTIVE');
-	$demo_account = $po->get_xml_tag_content($merchant_info, 'DEMO_ACCOUNT');
-	$keys_info = $po->get_xml_tag($merchant_info, 'KEYS_INFO');
+	$partner_id = (int)$po->get_xml_tag_content($raspuns_query_partener, 'PARTNER_ID');
+	$partner_info = $po->get_xml_tag($raspuns_query_partener, 'PARTNER_INFO');
+	$f_login = $po->get_xml_tag_content($partner_info, 'F_LOGIN');
+	$active = $po->get_xml_tag_content($partner_info, 'ACTIVE');
+	$demo_account = $po->get_xml_tag_content($partner_info, 'DEMO_ACCOUNT');
+	$keys_info = $po->get_xml_tag($partner_info, 'KEYS_INFO');
+	$bank_info = $po->get_xml_tag($partner_info, 'BANK_INFO');
+	$partner_login_accounts = $po->get_xml_tag($partner_info, 'PARTNER_LOGIN_ACCOUNTS'); // user and pass for merchant account
+
 	$f_auth_rsa_public_key = $po->get_xml_tag_content($keys_info, 'F_AUTH_RSA_PUBLIC_KEY');
 	$f_auth_init_vector = $po->get_xml_tag_content($keys_info, 'F_AUTH_INIT_VECTOR');
 	$f_itsn_rsa_private_key = $po->get_xml_tag_content($keys_info, 'F_ITSN_RSA_PRIVATE_KEY');
