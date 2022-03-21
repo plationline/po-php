@@ -207,8 +207,8 @@ if (!empty($redirect_url)) {
 
 // FOR RECCURENCE
 
-// $f_request['f_recurring_frequency'] 		   = 3;  // frequency: 1 - weekly, 2 - every 2 weeks, 3 - monthly, 4 - quarterly, 5 - semestrial
-// $f_request['f_recurring_expiration_date']   = ''; // reccurence expiry date (format YYYY-mm-dd) - maximum 24 months
+// $f_request['f_recurring_frequency'] 		   = 3;  // frequency: 1 - weekly, 2 - every 2 weeks, 3 - monthly, 4 - quarterly, 5 - semestrial, 8 - annually
+// $f_request['f_recurring_expiration_date']   = ''; // reccurence expiry date (format YYYY-mm-dd) - maximum 60 months
 // $po->auth($f_request, 20);
 
 // END FOR RECCURENCE
