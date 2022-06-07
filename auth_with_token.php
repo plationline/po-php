@@ -7,7 +7,7 @@ use PlatiOnline\PO5 as PO5;
 $f_request = array();
 
 $f_request['f_order_number'] = 'order number';
-$f_request['f_amount'] = (float)0;
+$f_request['f_amount'] = 0;
 $f_request['f_currency'] = 'RON/EUR/USD'; // choose one currency
 //$f_request['f_auth_minutes'] = 20; // 0 - waiting forever, 20 - default (in minutes)
 $f_request['f_language'] = 'RO'; // RO / EN / HU / IT / FR / DE / ES
