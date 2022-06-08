@@ -145,8 +145,11 @@ if (!empty($redirect_url)) {
 }
 // this will redirect the customer to PlatiOnline page
 die();
-// 1. END CARD VERIFICATION - INITIAL TRANZACTION
 
+// Transaction response: Auth - card verified - X_RESPONSE_CODE = 2, transitions automatically to 20
+// ITSN: Auth - card verified - STATUS_FIN1 = 20
+
+// 1. END CARD VERIFICATION - INITIAL TRANZACTION
 
 // 2. START TRANZACTION QUERY TO OBTAIN CARD INFO AND TOKEN
 $po = new PO5();
