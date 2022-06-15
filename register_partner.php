@@ -57,6 +57,8 @@ $partner_info['pos_info']['f_city'] = 'Bucuresti';                          // o
 
 $partner_info['sms2client'] = 1;                                // boolean. Should PO send SMS to client when a payment is authorized
 $partner_info['auto_settled_no_of_days'] = 0;                   // -1 -> 5, Numbers of days to autosettle, -1 never, 0 same day
+$partner_info['percentage_commission'] = 2.5;                   // commission percentage without VAT
+$partner_info['flat_commission'] = 0;                           // flat commission without VAT
 
 $f_request['partner_info'] = $partner_info;
 
