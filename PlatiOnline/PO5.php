@@ -43,6 +43,8 @@ class PO5
     private $url_sv_query_partener_xml              = 'https://secure.plationline.ro/xml_validation/f_message.query-partener.v1.xsd';    // query partener call
     private $url_sv_query_partener_response_xml     = 'https://secure.plationline.ro/xml_validation/query-partener.response.v1.xsd';    // query partener response
     private $url_sv_query_by_rrn_xml 		        = 'https://secure.plationline.ro/xml_validation/f_message.query-by-rrn.v1.xsd'; 	// query by rrn
+    private $url_sv_sms_xml                         = 'https://secure.plationline.ro/xml_validation/f_message.sms.v5.xsd';
+    private $url_sv_sms_response_xml                = 'https://secure.plationline.ro/xml_validation/sendSMS.response.v5.xsd';
 
     // public
     public $f_login 	= null;
@@ -495,6 +497,39 @@ class PO5
 
         // validez xml-ul primit ca raspuns de la PO
         $this->validate_xml($response, $this->url_sv_cancel_recurrence_response_xml);
+
+        return $this->xml_to_object($response);
+    }
+
+    public function sms($f_request, $f_action = 11)
+    {
+        // ne asiguram ca stergem tot ce e in campul f_request
+        $this->f_request = null;
+        $f_request['f_action'] = $f_action;
+        $f_request['f_stamp_to_send'] = date('Y-m-d\TH:i:sP', strtotime($f_request['f_stamp_to_send']));
+
+        $request = $this->setFRequest($f_request, 'po_send_sms', $this->url_sv_sms_xml);
+
+        $opts = array(
+            'http' => array(
+                'user_agent' => 'PlatiOnline-SOAP',
+            ),
+        );
+        $context = stream_context_create($opts);
+        $client = new SoapClient(null, array(
+            'location'       => $this->url,
+            'uri'            => 'sms',
+            'stream_context' => $context,
+        ));
+
+        $response = $client->__doRequest($request, $this->url, 'sms', 1);
+
+        if (empty($response)) {
+            throw new Exception('ERROR: Nu am putut comunica cu serverul PO pentru operatiunea de trimitere SMS!');
+        }
+
+        // validez xml-ul primit ca raspuns de la PO
+        $this->validate_xml($response, $this->url_sv_sms_response_xml);
 
         return $this->xml_to_object($response);
     }
