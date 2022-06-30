@@ -143,6 +143,9 @@ $f_request['f_order_string'] = 'Order number ' . $f_request['f_order_number'] . 
 //$f_request['merchants_fields']['GetQueryString'] 	= 'getmerchant=gettestmerch'; //GetQueryString
 //$f_request['merchants_fields']['SoapTags'] 		= '<field1>value1</field1><field2>value2</field2>'; //SoapTags
 
+// Acest tag este luat in considerare doar pentru comerciantii care au semnat anexa pentru serviciul de carduri de vacanta true - nu se aplica restrictii la cardul utilizat - default value true - plata nu se poate face cu cardurile de vacanta emise de: Sodexo, UpRomania, EdenRed
+//$f_request['f_allow_card_vacanta'] = false;
+
 require_once("PlatiOnline/PO5.php");
 
 use PlatiOnline\PO5 as PO5;
