@@ -35,7 +35,7 @@ class PO5
     private $url_sv_refund_xml 						= 'https://schemas.plationline.ro/f_message.refund.v5.xsd'; 	// refund
     private $url_sv_refund_response_xml 			= 'https://schemas.plationline.ro/refund.response.v5.xsd'; 	// refund response
     private $url_sv_paylink_xml 					= 'https://schemas.plationline.ro/f_message.paylink.xsd'; 	// paylink
-    private $url_sv_paylink_response_xml 			= 'https://schemas.plationline.ro/v5/pay.link.by.trxid.url.response.xsd'; 	// paylink response
+    private $url_sv_paylink_response_xml 			= 'https://schemas.plationline.ro/pay.link.by.trxid.url.response.xsd'; 	// paylink response
     private $url_sv_cancel_recurrence_xml 		    = 'https://schemas.plationline.ro/f_message.cancel.recurrence.v5.xsd'; 	// cancel recurring
     private $url_sv_cancel_recurrence_response_xml  = 'https://schemas.plationline.ro/cancel.recurrence.response.v5.xsd'; 	// cancel recurring response
     private $url_sv_partner_xml                     = 'https://schemas.plationline.ro/f_message.partner.v5.xsd';    // add partner
