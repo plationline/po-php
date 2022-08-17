@@ -20,7 +20,7 @@ $po->setIV('IV AUTH');
 
 $po->f_login = 'F_LOGIN from merchant interface';
 
-$f_request['f_website'] = $po->f_login;
+$f_request['f_website'] = str_replace('www.', '', $_SERVER['SERVER_NAME']);
 $f_request['f_order_number'] = $po->get_xml_tag_content($call_itsn, 'F_ORDER_NUMBER');
 $f_request['x_trans_id'] = $po->get_xml_tag_content($call_itsn, 'X_TRANS_ID');
 $raspuns_itsn = $po->query($f_request, 0);

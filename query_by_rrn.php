@@ -13,7 +13,7 @@ $po->setIV('IV AUTH');
 
 $po->f_login = 'F_LOGIN from merchant interface';
 
-$f_request['f_website'] = ''; // f_website, mandatory
+$f_request['f_website'] = str_replace('www.', '', $_SERVER['SERVER_NAME']); // f_website, mandatory
 $f_request['x_rrn'] = ''; // transaction RRN, mandatory
 $f_request['f_order_number'] = ''; // order number, optional
 $f_request['x_order_date'] = ''; // YYYY-MM-DD, optional

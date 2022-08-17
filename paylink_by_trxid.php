@@ -24,7 +24,7 @@ $po = new PO5();
 
 //f_login and RSA key will be saved in config
 $po->f_login = 'F_LOGIN from merchant interface';
-$f_request['f_website'] = $po->f_login;
+$f_request['f_website'] = str_replace('www.', '', $_SERVER['SERVER_NAME']);
 
 // RSA Public AUTH [Merchant side]:
 $po->setRSAKeyEncrypt('RSA Public AUTH [Merchant side]');

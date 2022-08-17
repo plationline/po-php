@@ -13,7 +13,7 @@ $po->setIV('IV AUTH');
 
 $po->f_login = 'F_LOGIN from merchant interface';
 
-$f_request['f_website'] = $po->f_login;
+$f_request['f_website'] = str_replace('www.', '', $_SERVER['SERVER_NAME']);
 $f_request['f_date'] = ''; //YYYY-MM-DD
 
 $raspuns_query_by_date = $po->query_by_date($f_request, 0);

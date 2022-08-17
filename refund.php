@@ -14,7 +14,7 @@ $po->setIV('IV AUTH');
 
 $po->f_login = 'F_LOGIN from merchant interface';
 
-$f_request['f_website'] = $po->f_login;
+$f_request['f_website'] = str_replace('www.', '', $_SERVER['SERVER_NAME']);
 $f_request['f_order_number'] = ''; // order number
 $f_request['f_amount'] = (float)11.01; // needed amount
 $f_request['x_trans_id'] = ''; // transaction ID
