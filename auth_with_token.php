@@ -124,6 +124,9 @@ $po->f_login = 'F_LOGIN from merchant interface';
 
 $f_request['f_website'] = str_replace('www.', '', $_SERVER['SERVER_NAME']);
 
+// maximum trx amount for future payment using f_action = 25
+//$f_request['f_mit_trx_max_amount'] = 200;
+
 // RSA Public AUTH [Merchant side]:
 $po->setRSAKeyEncrypt('RSA Public AUTH [Merchant side]');
 
