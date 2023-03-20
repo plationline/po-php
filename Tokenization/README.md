@@ -9,3 +9,4 @@
 3. Authorize a new payment using the token previously obtained, using 3DSecure or not
 * *non3DSecure payment* - MIT payment. Documented in **mit_non3DS.php** or
 * *3DSecure payment* - Documented in **tokenization_3DS.php**
+
