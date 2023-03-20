@@ -1,13 +1,8 @@
 <?php
-require_once("PlatiOnline/PO5.php");
-
-use PlatiOnline\PO5 as PO5;
-
-// 1. START CARD VERIFICATION - INITIAL TRANZACTION
 $f_request = array();
 
 $f_request['f_order_number'] = 'order number';
-$f_request['f_amount'] = 0;
+$f_request['f_amount'] = (float)21.59;
 $f_request['f_currency'] = 'RON/EUR/USD'; // choose one currency
 //$f_request['f_auth_minutes'] = 20; // 0 - waiting forever, 20 - default (in minutes)
 $f_request['f_language'] = 'RO'; // RO / EN / HU / IT / FR / DE / ES
@@ -73,7 +68,8 @@ $transaction_relay_response['f_relay_method'] = 'PTOR'; // PTOR, POST_S2S_PO_PAG
 $transaction_relay_response['f_post_declined'] = 1; // Valoarea = 1	(default value; sistemul PO trimite rezultatul la f_relay_response_url prin metoda f_relay_method)	Valoarea = 0	(systemul PO trimite rezultatul doar pentru tranzactiile "Autorizate" si "In curs de verificare" la <f_relay_response_url> prin metoda <f_relay_method>)
 $transaction_relay_response['f_relay_handshake'] = 1; // default 1
 $f_request['transaction_relay_response'] = $transaction_relay_response;
-//$f_request['tracking_script'] = "";
+
+//$f_request['tracking_script'] = 'tracking script';
 
 $f_request['f_order_cart'] = array();
 
@@ -82,35 +78,77 @@ $f_request['f_order_cart'] = array();
 // $item['vat']		  - VAT for 1 piece of the product * $item['qty']
 // END PLEASE READ
 
+for ($i = 0; $i < 2; $i++) {
+    $item = array();
 
-// DO THIS FOR ALL CART ITEMS
-$item = array();
+    $item['prodid'] = 1;
+    $item['name'] = substr('Produs ' . $i, 0, 250);
+    $item['description'] = substr('Descriere ' . $i, 0, 250);
+    $item['qty'] = 2;
+    $item['itemprice'] = (float)11.05; // price WITOUT VAT for 1 piece of the product
+    $item['vat'] = (float)2.22;  // VAT for 1 piece of the product * $item['qty']
+    $item['stamp'] = date('Y-m-d');
+    $item['prodtype_id'] = 0;
 
-$item['prodid'] = 1;
-$item['name'] = substr('Card verification', 0, 250);
-$item['description'] = substr('Card verification', 0, 250);
-$item['qty'] = 1;
-$item['itemprice'] = (float)1; // price WITOUT VAT for 1 piece of the product
-$item['vat'] = (float)0;  // VAT for 1 piece of the product * $item['qty']
-$item['stamp'] = date('Y-m-d');
-$item['prodtype_id'] = 0;
+    $f_request['f_order_cart'][] = $item;
+}
 
-$f_request['f_order_cart'][] = $item;
+// ACTIVATE ONLY IF YOU USE COUPONS
+/*
+//coupon 1
+$coupon1 = array();
+$coupon1['key'] 		= '0002C';
+$coupon1['value'] 		= (float)10.00;
+$coupon1['percent'] 	= 1;
+$coupon1['workingname']	= 'Cupon reducere';
+$coupon1['type'] 		= 0;
+$coupon1['scop'] 		= 0;
+$coupon1['vat'] 		= (float)1.11;
+$f_request['f_order_cart']['coupon1'] = $coupon1;
+
+//coupon 2
+$coupon2 = array();
+$coupon2['key'] 		= '0002D';
+$coupon2['value'] 		= (float)7.50;
+$coupon2['percent'] 	= 0;
+$coupon2['workingname']	= 'Cupon reducere';
+$coupon2['type'] 		= 0;
+$coupon2['scop'] 		= 0;
+$coupon2['vat'] 		= (float)0.11;
+$f_request['f_order_cart']['coupon2'] = $coupon2;
+
+// declare $f_request['f_order_cart']['coupon1'], $f_request['f_order_cart']['coupon2']; we index the field ['coupon'] to have different names in array and to avoid overwriting the values
+// the array to xml method takes care of this case by looking for "coupon" substring
+$f_request['f_order_cart']['coupon1'] = $coupon1;
+$f_request['f_order_cart']['coupon2'] = $coupon2;
+*/
+// END ACTIVATE ONLY IF YOU USE COUPONS
 
 //shipping
 $shipping = array();
-$shipping['name'] = substr('Shipping', 0, 250);
-$shipping['price'] = (float)0;
+$shipping['name'] = substr('Shipping 1', 0, 250);
+$shipping['price'] = (float)15.5;
 $shipping['pimg'] = 0;
-$shipping['vat'] = (float)0;
+$shipping['vat'] = (float)2.5;
 
 $f_request['f_order_cart']['shipping'] = $shipping;
 $f_request['f_order_string'] = 'Order number ' . $f_request['f_order_number'] . ' on website http://domain.com';
+
+// TRA
+// $f_request['f_trx_risk_analysis'] = 0; // 0 - false, 1 - true
+// Acest tag este luat in considerare doar pentru comerciantii care au semnat anexa TRA si pentru care s-au activat exceptiile 3DS2 - TRA "Transaction Risk Analysis" false - tranzactia se va trimite fara exceptie - default value true - tranzactia se va trimite cu exceptie
 
 //custom merchant fields - they will be returned to you in f_relay_response_url by POST or GET or SOAP, according to where you send them
 //$f_request['merchants_fields']['PostQueryString'] = 'postmerchant=posttestmerch'; //PostQueryString
 //$f_request['merchants_fields']['GetQueryString'] 	= 'getmerchant=gettestmerch'; //GetQueryString
 //$f_request['merchants_fields']['SoapTags'] 		= '<field1>value1</field1><field2>value2</field2>'; //SoapTags
+
+// Acest tag este luat in considerare doar pentru comerciantii care au semnat anexa pentru serviciul de carduri de vacanta true - nu se aplica restrictii la cardul utilizat - default value true - plata nu se poate face cu cardurile de vacanta emise de: Sodexo, UpRomania, EdenRed
+//$f_request['f_allow_card_vacanta'] = false;
+
+require_once("../PlatiOnline/PO5.php");
+
+use PlatiOnline\PO5 as PO5;
 
 $po = new PO5();
 
@@ -123,13 +161,10 @@ $po->f_login = 'F_LOGIN from merchant interface';
 // - after we approve your websites, please use Website/POS value for $f_request['f_website']
 
 $f_request['f_website'] = str_replace('www.', '', $_SERVER['SERVER_NAME']);
-
-// maximum trx amount for future payment using f_action = 25
-//$f_request['f_mit_trx_max_amount'] = 200;
+// END INFO f_website
 
 // RSA Public AUTH [Merchant side]:
 $po->setRSAKeyEncrypt('RSA Public AUTH [Merchant side]');
-
 // IV AUTH:
 $po->setIV('IV AUTH');
 //end f_login and RSA key will be saved in config
@@ -137,8 +172,17 @@ $po->setIV('IV AUTH');
 // test mode: 0 - disabled, 1 - enabled
 $po->test_mode = 1;
 
-// plationline request for token payment
-$auth_response = $po->auth($f_request, 24); // parameter 1 - request content, 2 - f_action (request for token payments.)
+// OPTIONAL - send email to client requesting payment and days of valability for payment link
+/*$f_request['paylink'] = array(
+	'email2client'     => 1,
+	'sms2client'       => 0,
+	'daysofvalability' => 30,
+);*/
+// END OPTIONAL - send email to client requesting payment and days of valability for payment link
+
+// plationline authorization call
+// simple payment, no installments
+$auth_response = $po->auth($f_request, 2);
 $redirect_url = $po->get_xml_tag_content($auth_response, 'PO_REDIRECT_URL');
 $transid = $po->get_xml_tag_content($auth_response, 'X_TRANS_ID');
 if (!empty($redirect_url)) {
@@ -146,81 +190,3 @@ if (!empty($redirect_url)) {
 } else {
     throw new \Exception('ERROR: Serverul nu a intors URL-ul pentru a finaliza tranzactia!');
 }
-// this will redirect the customer to PlatiOnline page
-die();
-
-// Transaction response: Auth - card verified - X_RESPONSE_CODE = 2, transitions automatically to 20
-// ITSN: Auth - card verified - STATUS_FIN1 = 20
-
-// 1. END CARD VERIFICATION - INITIAL TRANZACTION
-
-// 2. START TRANZACTION QUERY TO OBTAIN CARD INFO AND TOKEN
-$po = new PO5();
-$po->setRSAKeyEncrypt('RSA Public AUTH [Merchant side]');
-
-// IV AUTH:
-$po->setIV('IV AUTH');
-$po->f_login = 'F_LOGIN from merchant interface';
-
-$f_request['f_website'] = str_replace('www.', '', $_SERVER['SERVER_NAME']);
-
-$f_request['f_order_number'] = 'order number'; //order number sent at first step
-$f_request['x_trans_id'] = 'Tranzaction ID obtained in first step'; //initial tranzaction number obtained at first step ($transid)
-$f_request['x_request_payment_token'] = 1;
-$raspuns_query = $po->query($f_request, 0);
-
-if ($po->get_xml_tag_content($raspuns_query, 'PO_ERROR_CODE') == 1) {
-    throw new Exception($po->get_xml_tag_content($raspuns_query, 'PO_ERROR_REASON'));
-} else {
-    $order = $po->get_xml_tag($raspuns_query, 'ORDER');
-    $order_number = $po->get_xml_tag_content($order, 'F_ORDER_NUMBER');
-    $tranzaction = $po->get_xml_tag($order, 'TRANZACTION');
-    $X_TRANS_ID = $po->get_xml_tag_content($tranzaction, 'X_TRANS_ID');
-    $starefin1 = $po->get_xml_tag_content($po->get_xml_tag($tranzaction, 'STATUS_FIN1'), 'CODE');
-    $starefin2 = $po->get_xml_tag_content($po->get_xml_tag($tranzaction, 'STATUS_FIN2'), 'CODE');
-
-    $po_payment_token = $po->get_xml_tag($raspuns_query, 'PO_PAYMENT_TOKEN');
-    $token = $po->get_xml_tag_content($po_payment_token, 'TOKEN');
-    $token_expire_timestamp = $po->get_xml_tag_content($po_payment_token, 'TOKEN_EXPIRE_TIMESTAMP');
-    $cc_6x4 = $po->get_xml_tag_content($po_payment_token, 'CC_6X4');
-    $cc_issuer_name = $po->get_xml_tag_content($po_payment_token, 'CC_ISSUER_NAME');
-    $cc_issuer_country = $po->get_xml_tag_content($po_payment_token, 'CC_ISSUER_COUNTRY');
-    $cc_expire_timestamp = $po->get_xml_tag_content($po_payment_token, 'CC_EXPIRE_TIMESTAMP');
-}
-// 2. END TRANZACTION QUERY TO OBTAIN CARD INFO AND TOKEN
-
-
-// 3. START TRANZACTION AUTH BY TOKEN
-$f_request = array();
-
-$f_request['f_amount'] = (float)0.50;
-$f_request['f_currency'] = 'RON';
-//$f_request['f_auth_minutes'] = 20; // 0 - waiting forever, 20 - default (in minutes)
-$f_request['f_language'] = 'RO';
-
-$f_request['f_order_string'] = 'Sale with token';
-$f_request['f_order_number'] = $order_number; //order number sent at first step
-$f_request['x_trans_id'] = $X_TRANS_ID; // initial tranzaction number obtained at first step
-$f_request['x_payment_token'] = $token; // payment token obtained by query in step 2
-
-$po = new PO5();
-$po->f_login = 'F_LOGIN from merchant interface';
-$f_request['f_website'] = str_replace('www.', '', $_SERVER['SERVER_NAME']);
-
-// RSA Public AUTH [Merchant side]:
-$po->setRSAKeyEncrypt('RSA Public AUTH [Merchant side]');
-
-// IV AUTH:
-$po->setIV('IV AUTH');
-$po->test_mode = 1;
-
-$sale_response = $po->sale_by_token($f_request, 25);
-
-$X_RESPONSE_CODE = $po->get_xml_tag_content($sale_response, 'X_RESPONSE_CODE');
-$X_TRANS_ID = $po->get_xml_tag_content($sale_response, 'X_TRANS_ID');
-
-// $X_RESPONSE_CODE
-// 2 - auth
-// 8 - declined
-
-// 3. END TRANZACTION AUTH BY TOKEN
