@@ -7,6 +7,7 @@
 2. Every time you want to authorize a new payment by token you need to obtain the token using the master f_order_number and x_trans_id (from step 1). Documented in <b>query_for_token.php</b>. If you get a token, the master transaction allows you to authorize future payments using token.
 <br/><br/>
 3. Authorize a new payment using the token previously obtained, using 3DSecure or not
+
 * <i>non3DSecure payment</i> - MIT payment. Documented in <b>mit_non3DS.php</b> or
 * <i>3DSecure payment</i> - Documented in <b>tokenization_3DS.php</b>
 
