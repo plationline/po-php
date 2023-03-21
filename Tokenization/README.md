@@ -11,3 +11,4 @@
 * <i>non3DSecure payment</i> - MIT payment. Documented in <b>mit_non3DS.php</b> or
 * <i>3DSecure payment</i> - Documented in <b>tokenization_3DS.php</b>
 
+If you need to cancel Tokenization, use <b>cancel_token.php</b> using master x_trans_id and master f_order_number
