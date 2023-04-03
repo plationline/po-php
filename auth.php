@@ -172,13 +172,16 @@ $po->setIV('IV AUTH');
 // test mode: 0 - disabled, 1 - enabled
 $po->test_mode = 1;
 
-// OPTIONAL - send email to client requesting payment and days of valability for payment link
+// OPTIONAL - send email to client requesting payment
+// days of valability for payment link OR
+// stamp2expire - payment link will expire at that given stamp
 /*$f_request['paylink'] = array(
-	'email2client'     => 1,
-	'sms2client'       => 0,
-	'daysofvalability' => 30,
+    'email2client' => 1,
+    'sms2client' => 0,
+    'daysofvalability' => 30,
+    'stamp2expire' => date('Y-m-d\TH:i:s', strtotime('+1 day'))
 );*/
-// END OPTIONAL - send email to client requesting payment and days of valability for payment link
+// END OPTIONAL - send email to client requesting payment
 
 // plationline authorization call
 // simple payment, no installments / FARA RATE

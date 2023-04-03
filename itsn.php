@@ -113,7 +113,7 @@ if ($po->get_xml_tag_content($raspuns_itsn, 'PO_ERROR_CODE') == 1) {
     $raspuns_xml = '<?xml version="1.0" encoding="UTF-8" ?>';
     $raspuns_xml .= '<itsn>';
     $raspuns_xml .= '<x_trans_id>' . $X_TRANS_ID . '</x_trans_id>';
-    $raspuns_xml .= '<merchServerStamp>' . date("Y-m-dTH:i:s") . '</merchServerStamp>';
+    $raspuns_xml .= '<merchServerStamp>' . date("Y-m-d\TH:i:s") . '</merchServerStamp>';
     $raspuns_xml .= $stare1;
     $raspuns_xml .= '</itsn>';
 
