@@ -19,6 +19,11 @@ $f_request['f_order_number'] = ''; // order number
 $f_request['f_amount'] = (float)11.01; // needed amount
 $f_request['x_trans_id'] = ''; // transaction ID
 
+// optional
+//$f_request['execute_now'] = 0; // 1 - operatia de rambursare se efectua imediat 0 - operatia de rambursare se va trimite cursul zilei
+//$f_request['partner_cui'] = ''; // Acest tag este luat in considerare doar pentru comerciantii care au o platforma marketplace
+
+
 $response_refund = $po->refund($f_request, 1);
 
 if ($po->get_xml_tag_content($response_refund, 'PO_ERROR_CODE') == 1) {
