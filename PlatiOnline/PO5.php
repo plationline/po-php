@@ -649,7 +649,7 @@ class PO5
 
         $request['f_login'] 			= $this->f_login;
         $request['f_message']			= $this->f_request;
-        $request['f_crypt_message ']	= $this->f_secure;
+        $request['f_crypt_message']	    = $this->f_secure;
 
         $xml_auth_soap = new \SimpleXMLElement('<po_request/>');
         $this->array2xml($request, $xml_auth_soap);
