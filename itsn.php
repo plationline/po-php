@@ -43,6 +43,9 @@ if ($po->get_xml_tag_content($raspuns_itsn, 'PO_ERROR_CODE') == 1) {
     $starefin1 = $po->get_xml_tag_content($po->get_xml_tag($tranzaction, 'STATUS_FIN1'), 'CODE');
     $starefin2 = $po->get_xml_tag_content($po->get_xml_tag($tranzaction, 'STATUS_FIN2'), 'CODE');
 
+    // parent transaction id for recurrence
+    $parent_trans_id = $po->get_xml_tag_content($tranzaction, 'X_PARENT_TRANS_ID');
+
     $stare1 = '<f_response_code>1</f_response_code>';
 
     switch ($starefin1) {
