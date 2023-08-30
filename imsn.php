@@ -19,13 +19,20 @@ $po->setRSAKeyEncrypt('RSA Public AUTH [Merchant side]');
 $po->setIV('IV AUTH');
 $po->f_login = 'F_LOGIN from merchant interface';
 $f_request['f_partenerid'] = (int)$po->get_xml_tag_content($imsn, 'F_PARTNERID');
+$f_request['f_website'] = $po->get_xml_tag_content($imsn, 'F_WEBSITE');
+
 $raspuns_query_partener = $po->query_partener($f_request, 40);
 
 if ($po->get_xml_tag_content($raspuns_query_partener, 'PO_ERROR_CODE') == 1) {
 	throw new Exception($po->get_xml_tag_content($raspuns_query_partener, 'PO_ERROR_REASON'));
 } else {
 	$partner_id = (int)$po->get_xml_tag_content($raspuns_query_partener, 'PARTNER_ID');
-	$partner_info = $po->get_xml_tag($raspuns_query_partener, 'PARTNER_INFO');
+
+    $partner_info = $po->get_xml_tag($raspuns_query_partener, 'PARTNER_INFO');
+    $pos_info = $po->get_xml_tag($raspuns_query_partener, 'POS_INFO');
+
+    $f_website = $po->get_xml_tag_content($pos_info, 'F_WEBSITE');
+
 	$f_login = $po->get_xml_tag_content($partner_info, 'F_LOGIN');
 	$active = $po->get_xml_tag_content($partner_info, 'ACTIVE');
 	$demo_account = $po->get_xml_tag_content($partner_info, 'DEMO_ACCOUNT');
