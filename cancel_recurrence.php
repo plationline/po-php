@@ -15,7 +15,7 @@ $po->f_login = 'F_LOGIN from merchant interface';
 
 $f_request['f_website'] = str_replace('www.', '', $_SERVER['SERVER_NAME']);
 $f_request['f_order_number'] = '';
-$f_request['x_trans_id'] = ''; // transaction ID
+$f_request['x_trans_id'] = ''; // master transaction ID or recurrent transaction ID
 
 $response_cancel_recurrence = $po->cancel_recurrence($f_request, 26);
 
