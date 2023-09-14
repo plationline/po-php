@@ -163,6 +163,8 @@ $po->f_login = 'F_LOGIN from merchant interface';
 $f_request['f_website'] = str_replace('www.', '', $_SERVER['SERVER_NAME']);
 // END INFO f_website
 
+$f_request['f_save_cc'] = 1; // instructs PlatiOnline to pre-check the save card option on payment page
+
 // RSA Public AUTH [Merchant side]:
 $po->setRSAKeyEncrypt('RSA Public AUTH [Merchant side]');
 // IV AUTH:
