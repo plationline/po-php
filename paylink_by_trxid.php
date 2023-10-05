@@ -14,7 +14,7 @@ $f_request['x_trans_id'] = ''; // parent transaction ID from where we get the cu
 //custom merchant fields
 //$f_request['merchants_fields']['PostQueryString'] = 'postmerchant=posttestmerch'; //PostQueryString
 //$f_request['merchants_fields']['GetQueryString'] 	= 'getmerchant=gettestmerch'; //GetQueryString
-//$f_request['merchants_fields']['SoapTags'] 		= '<field1>value1</field1><field2>value2</field2>'; //SoapTags
+//$f_request['merchants_fields']['SoapTags'] 		= [ 'root' => ['field1' => 'value1', 'field2' => 'value2'] ]; //SoapTags
 
 require_once("PlatiOnline/PO5.php");
 

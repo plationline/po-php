@@ -110,7 +110,7 @@ $f_request['f_order_string'] = 'Order number ' . $f_request['f_order_number'] . 
 //custom merchant fields - they will be returned to you in f_relay_response_url by POST or GET or SOAP, according to where you send them
 //$f_request['merchants_fields']['PostQueryString'] = 'postmerchant=posttestmerch'; //PostQueryString
 //$f_request['merchants_fields']['GetQueryString'] 	= 'getmerchant=gettestmerch'; //GetQueryString
-//$f_request['merchants_fields']['SoapTags'] 		= '<field1>value1</field1><field2>value2</field2>'; //SoapTags
+//$f_request['merchants_fields']['SoapTags'] 		= [ 'root' => ['field1' => 'value1', 'field2' => 'value2'] ]; //SoapTags
 
 $po = new PO5();
 

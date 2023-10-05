@@ -141,7 +141,7 @@ $f_request['f_order_string'] = 'Order number ' . $f_request['f_order_number'] . 
 //custom merchant fields - they will be returned to you in f_relay_response_url by POST or GET or SOAP, according to where you send them
 //$f_request['merchants_fields']['PostQueryString'] = 'postmerchant=posttestmerch'; //PostQueryString
 //$f_request['merchants_fields']['GetQueryString'] 	= 'getmerchant=gettestmerch'; //GetQueryString
-//$f_request['merchants_fields']['SoapTags'] 		= '<field1>value1</field1><field2>value2</field2>'; //SoapTags
+//$f_request['merchants_fields']['SoapTags'] 		= [ 'root' => ['field1' => 'value1', 'field2' => 'value2'] ]; //SoapTags
 
 // Acest tag este luat in considerare doar pentru comerciantii care au semnat anexa pentru serviciul de carduri de vacanta true - nu se aplica restrictii la cardul utilizat - default value true - plata nu se poate face cu cardurile de vacanta emise de: Sodexo, UpRomania, EdenRed
 //$f_request['f_allow_card_vacanta'] = false;
