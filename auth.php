@@ -11,23 +11,27 @@ $customer_info = array();
 
 //contact
 $customer_info['contact']['f_email'] = 'email@domain.com';    // must not be empty. If empty don't send this tag, it will be filled in PO interface
-$customer_info['contact']['f_phone'] = '0231100100';        // must not be empty, minimum 4 characters. If empty don't send this tag, it will be filled in PO interface
-$customer_info['contact']['f_mobile_number'] = '0799999999';
+if (strlen('0231100100') >= 4) {
+    $customer_info['contact']['f_phone'] = substr('0231100100', 0, 20);        // must not be empty, minimum 4 characters. If empty don't send this tag, it will be filled in PO interface
+}
+if (strlen('0799999999') >= 4) {
+    $customer_info['contact']['f_mobile_number'] = substr('0799999999', 0, 20);
+}
 $customer_info['contact']['f_send_sms'] = 1;                   // 1 - sms client notification 0 - no notification
-$customer_info['contact']['f_first_name'] = 'first name';        // must not be empty. If empty don't send this tag, it will be filled in PO interface
-$customer_info['contact']['f_last_name'] = 'last name';            // must not be empty. If empty don't send this tag, it will be filled in PO interface
+$customer_info['contact']['f_first_name'] = substr('first name', 0, 50);        // must not be empty. If empty don't send this tag, it will be filled in PO interface
+$customer_info['contact']['f_last_name'] = substr('last name', 0, 50);            // must not be empty. If empty don't send this tag, it will be filled in PO interface
 //$customer_info['contact']['f_middle_name'] 	 = '';
 
 //invoice
-$customer_info['invoice']['f_company'] = 'Test company';        // optional
-$customer_info['invoice']['f_cui'] = '111111';            // optional
-$customer_info['invoice']['f_reg_com'] = 'J55/99/2000';        // optional
-$customer_info['invoice']['f_cnp'] = '9999999999999';        // optional
-$customer_info['invoice']['f_zip'] = '999999';            // optional
-$customer_info['invoice']['f_country'] = 'Romania';            // must not be empty. If empty don't send this tag, it will be filled in PO interface
-$customer_info['invoice']['f_state'] = 'Bucuresti';            // must not be empty. If empty don't send this tag, it will be filled in PO interface
-$customer_info['invoice']['f_city'] = 'Bucuresti';            // must not be empty. If empty don't send this tag, it will be filled in PO interface
-$customer_info['invoice']['f_address'] = 'Address';            // must not be empty. If empty don't send this tag, it will be filled in PO interface
+$customer_info['invoice']['f_company'] = substr('Test company', 0, 150);        // optional
+$customer_info['invoice']['f_cui'] = substr('111111', 0, 50);            // optional
+$customer_info['invoice']['f_reg_com'] = substr('J55/99/2000', 0, 50);        // optional
+$customer_info['invoice']['f_cnp'] = substr('9999999999999', 0, 50);        // optional
+$customer_info['invoice']['f_zip'] = substr('999999', 0, 50);            // optional
+$customer_info['invoice']['f_country'] = substr('Romania', 0, 50);            // must not be empty. If empty don't send this tag, it will be filled in PO interface
+$customer_info['invoice']['f_state'] = substr('Bucuresti', 0, 50);            // must not be empty. If empty don't send this tag, it will be filled in PO interface
+$customer_info['invoice']['f_city'] = substr('Bucuresti', 0, 50);            // must not be empty. If empty don't send this tag, it will be filled in PO interface
+$customer_info['invoice']['f_address'] = substr('Address', 0, 150);            // must not be empty. If empty don't send this tag, it will be filled in PO interface
 
 $f_request['customer_info'] = $customer_info;
 
@@ -37,20 +41,24 @@ $shipping_info['same_info_as'] = 0; // 0 - different info, 1- same info as custo
 
 //contact
 $shipping_info['contact']['f_email'] = 'email@domain.com';
-$shipping_info['contact']['f_phone'] = '0231999999';
-$shipping_info['contact']['f_mobile_number'] = '0749999999';
+if (strlen('0231999999') >= 4) {
+    $shipping_info['contact']['f_phone'] = substr('0231999999', 0, 20);
+}
+if (strlen('0749999999') >= 4) {
+    $shipping_info['contact']['f_mobile_number'] = substr('0749999999', 0, 20);
+}
 $shipping_info['contact']['f_send_sms'] = 1;                   // 1 - sms client notification 0 - no notification
-$shipping_info['contact']['f_first_name'] = 'first name';
-$shipping_info['contact']['f_last_name'] = 'last name';
+$shipping_info['contact']['f_first_name'] = substr('first name', 0, 50);
+$shipping_info['contact']['f_last_name'] = substr('last name', 0, 50);
 //$shipping_info['contact']['f_middle_name'] 	 = '';
 
 //address
-$shipping_info['address']['f_company'] = 'test company';
-$shipping_info['address']['f_zip'] = '999999';
-$shipping_info['address']['f_country'] = 'Romania';
-$shipping_info['address']['f_state'] = 'Bucuresti';
-$shipping_info['address']['f_city'] = 'Bucuresti';
-$shipping_info['address']['f_address'] = substr('Address', 0, 100);
+$shipping_info['address']['f_company'] = substr('test company', 0, 150);
+$shipping_info['address']['f_zip'] = substr('999999', 0, 50);
+$shipping_info['address']['f_country'] = substr('Romania', 0, 50);
+$shipping_info['address']['f_state'] = substr('Bucuresti', 0, 50);
+$shipping_info['address']['f_city'] = substr('Bucuresti', 0, 50);
+$shipping_info['address']['f_address'] = substr('Address', 0, 150);
 
 // shipping info may not be sent if no shipping is necessary (virtual products)
 $f_request['shipping_info'] = $shipping_info;
@@ -148,7 +156,7 @@ $f_request['f_order_string'] = 'Order number ' . $f_request['f_order_number'] . 
 
 require_once("PlatiOnline/PO5.php");
 
-use PlatiOnline\PO5 as PO5;
+use PlatiOnline\PO5;
 
 $po = new PO5();
 
