@@ -577,9 +577,15 @@ class PO5
                 // Namespaced Classes
                 $classfile = str_replace('\\', '/', $classname);
                 if ($classname[0] !== '/') {
-                    $classfile = dirname(__FILE__).'/libraries/'.$classfile.'.php';
+                    $classfile = dirname(__FILE__) . '/libraries/' . $classfile . '.php';
                 }
-                require($classfile);
+
+                // Allow only classnames that contains "phpseclib" and "sylouuu" and "PlatiOnline" make it caseinsensitive
+                if (stripos($classfile, 'phpseclib') !== false || stripos($classfile, 'sylouuu') !== false || stripos($classfile, 'PlatiOnline') !== false) {
+                    if (file_exists($classfile)) {
+                        require($classfile);
+                    }
+                }
             }
         });
     }
