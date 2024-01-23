@@ -184,7 +184,7 @@ $po->test_mode = 1;
 // days of valability for payment link OR
 // stamp2expire - payment link will expire at that given stamp
 /*$f_request['paylink'] = array(
-    'email2client' => 1,
+    'email2client' => 0,
     'sms2client' => 0,
     'daysofvalability' => 30,
     'stamp2expire' => date('Y-m-d\TH:i:s', strtotime('+1 day'))
