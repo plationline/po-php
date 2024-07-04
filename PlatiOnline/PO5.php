@@ -127,8 +127,7 @@ class PO5
         $client  = new \SoapClient(null, array(
             'location' 		 => $this->url,
             'uri'      		 => 'sale-by-token',
-            'stream_context' => $context,
-            'trace' => 1
+            'stream_context' => $context
         ));
         $response = $client->__doRequest($request, $this->url, 'sale-by-token', 1);
         if (empty($response)) {
