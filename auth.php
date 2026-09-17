@@ -98,6 +98,9 @@ for ($i = 0; $i < 2; $i++) {
     $item['stamp'] = date('Y-m-d');
     $item['prodtype_id'] = 0;
 
+    // for marketplace:
+    // $item['cui'] = '123456';
+
     $f_request['f_order_cart'][] = $item;
 }
 
@@ -112,6 +115,8 @@ $coupon1['workingname']	= 'Cupon reducere';
 $coupon1['type'] 		= 0;
 $coupon1['scop'] 		= 0;
 $coupon1['vat'] 		= (float)1.11;
+// for marketplace:
+// $coupon1['cui'] = '123456';
 $f_request['f_order_cart']['coupon1'] = $coupon1;
 
 //coupon 2
@@ -123,6 +128,8 @@ $coupon2['workingname']	= 'Cupon reducere';
 $coupon2['type'] 		= 0;
 $coupon2['scop'] 		= 0;
 $coupon2['vat'] 		= (float)0.11;
+// for marketplace:
+// $coupon2['cui'] = '123456';
 $f_request['f_order_cart']['coupon2'] = $coupon2;
 
 // declare $f_request['f_order_cart']['coupon1'], $f_request['f_order_cart']['coupon2']; we index the field ['coupon'] to have different names in array and to avoid overwriting the values
@@ -138,6 +145,8 @@ $shipping['name'] = substr('Shipping 1', 0, 250);
 $shipping['price'] = (float)15.5;
 $shipping['pimg'] = 0;
 $shipping['vat'] = (float)2.5;
+// for marketplace:
+// $shipping['cui'] = '123456';
 
 $f_request['f_order_cart']['shipping'] = $shipping;
 $f_request['f_order_string'] = 'Order number ' . $f_request['f_order_number'] . ' on website http://domain.com';
